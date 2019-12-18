@@ -1,49 +1,57 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PostList from "./components/PostList"
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-const POST_URL = 'http://drupal.docker.localhost:8000/jsonapi/node/article?sort=-created,title&include=field_tags';
-
-class App extends Component {
-
-    constructor() {
-        super();
-        this.state = { data: null };
-        this.loadPosts = this.loadPosts.bind(this);
-        this.updateData = this.updateData.bind(this);
-    }
-
-    componentDidMount() {
-        this.loadPosts();
-    }
-
-    updateData(responseData) {
-        this.setState({
-            data: responseData.data, 
-            included: responseData.included
-        });
-    }
-
-    loadPosts() {
-        console.log("Loading posts...");
-        fetch(POST_URL, {mode:'cors'})
-            .then(function (response) {
-                return response.json();
-            })
-            .then((data) => this.updateData(data))
-            .catch(err => console.log('Fetching Posts Failed', err));
-    }
-
-    render() {
-        return (
-            <div className="m-8">
-                <PostList
-                    data={this.state.data}
-                    included={this.state.included}
-                    loadPosts={this.loadPosts}
-                />
-            </div>
-        )
-    }
+function Home() {
+    return (
+        <div className="m-8">Welcome!</div>
+    )
 }
 
-export default App;
+function Posts() {
+    const POST_URL = 'http://drupal.docker.localhost:8000/jsonapi/node/article?sort=-created,title&include=field_tags';
+    
+    return (
+        <div className="m-8">
+            <PostList
+                url={POST_URL}
+            />
+        </div>
+    )
+}
+
+// Begin routing here
+export default function main() {
+  return (
+    <Router>
+      <div>
+        {/* Header Here */}
+        {/* Refactor to Nav Component */}
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/posts">Posts</Link>
+            </li>
+          </ul>
+        </nav>
+        {/* Content Area */}
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/posts">
+            <Posts />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
