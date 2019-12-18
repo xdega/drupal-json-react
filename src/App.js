@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PostList from "./components/PostList"
 
-const POST_URL = 'http://drupal.docker.localhost:8000/jsonapi/node/article';
+const POST_URL = 'http://drupal.docker.localhost:8000/jsonapi/node/article?sort=-created,title&include=field_tags';
 
 class App extends Component {
 
@@ -17,7 +17,10 @@ class App extends Component {
     }
 
     updateData(responseData) {
-        this.setState({data: responseData.data});
+        this.setState({
+            data: responseData.data, 
+            included: responseData.included
+        });
     }
 
     loadPosts() {
@@ -32,9 +35,10 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div className="m-8">
                 <PostList
                     data={this.state.data}
+                    included={this.state.included}
                     loadPosts={this.loadPosts}
                 />
             </div>
