@@ -1,5 +1,6 @@
 import React from 'react';
-import PostList from "./components/PostList"
+import PostList from "./components/posts/PostList"
+import Header from "./components/Header"
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,12 +16,9 @@ function Home() {
 
 function Posts() {
     const POST_URL = 'http://drupal.docker.localhost:8000/jsonapi/node/article?sort=-created,title&include=field_tags';
-    
     return (
-        <div className="m-8">
-            <PostList
-                url={POST_URL}
-            />
+        <div>
+            <PostList url={POST_URL} />
         </div>
     )
 }
@@ -29,8 +27,9 @@ function Posts() {
 export default function main() {
   return (
     <Router>
-      <div>
+      <div className='m-8'>
         {/* Header Here */}
+            <Header />
         {/* Refactor to Nav Component */}
         <nav>
           <ul>
