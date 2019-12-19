@@ -6,7 +6,6 @@ export default class PostList extends React.Component {
      constructor() {
       super();
       this.state = { data: null };
-      this.state.title = "posts";
       this.loadPosts = this.loadPosts.bind(this);
       this.updateData = this.updateData.bind(this);
     }
@@ -35,11 +34,11 @@ export default class PostList extends React.Component {
     render() {
         return (
             <div>
-               { this.state.data !== null && this.state.data !== undefined && this.state.data.length > 0 ?
+              { this.state.data !== null && this.state.data !== undefined && this.state.data.length > 0 ?
                    this.state.data.map(item => <PostItem {...item} key={item.id}/>)
                    :
-                    <div>No posts found.</div>
-               }
+                    <div className="text-center mt-2 p-3 bg-red-200 border-solid border-red-300 border">No posts found.</div>
+              }
             </div>
         );
     }
