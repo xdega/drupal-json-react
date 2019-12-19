@@ -5,7 +5,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 function Home() {
@@ -28,20 +27,8 @@ export default function main() {
   return (
     <Router>
       <div className='m-8'>
-        {/* Header Here */}
-            <Header />
-        {/* Refactor to Nav Component */}
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/posts">Posts</Link>
-            </li>
-          </ul>
-        </nav>
-        {/* Content Area */}
+        <Header />
+        {/* Content Area. Refactor? */}
         <Switch>
           <Route exact path="/">
             <Home />
