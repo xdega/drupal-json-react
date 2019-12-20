@@ -12,6 +12,9 @@ export default class Navigation extends React.Component {
               <li className="md:inline-block md:ml-4">
                 <NavLink to="/posts" activeClassName="text-yellow-600 font-extrabold">Posts</NavLink>
               </li>
+              <li className="md:inline-block md:ml-4">
+                <NavLink to="/cats" activeClassName="text-yellow-600 font-extrabold">Cats</NavLink>
+              </li>
             </ul>
           </nav>
         );
