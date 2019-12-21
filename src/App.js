@@ -12,9 +12,6 @@ import {
 } from "react-router-dom";
 
 export default function main() {
-  // These should be refactored to environment variables and moved to their components?
-  const POST_URL = 'http://drupal.docker.localhost:8000/jsonapi/node/article?sort=-created,title&include=field_tags';
-
   return (
     <Router>
       <div className='m-8'>
