@@ -12,8 +12,7 @@ import {
 export default function main() {
   // These should be refactored to environment variables and moved to their components?
   const POST_URL = 'http://drupal.docker.localhost:8000/jsonapi/node/article?sort=-created,title&include=field_tags';
-  const CAT_URL = 'http://api.giphy.com/v1/gifs/search?api_key=aux6wtHbGzGUEkhXNUW0KapoFsIeoxY8&rating=g&q=cats';
-  
+  const CAT_URL = 'http://api.giphy.com/v1/gifs/search?api_key=aux6wtHbGzGUEkhXNUW0KapoFsIeoxY8&rating=g&q=cats&limit=9';
 
   return (
     <Router>
