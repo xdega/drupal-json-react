@@ -1,49 +1,33 @@
-import React, { Component } from 'react';
-import PostList from "./components/PostList"
+import React from 'react';
+// compontents
+import Posts from "./components/posts/PostList"
+import Cats from "./components/cats/CatList"
+import Home from "./components/Home"
+import Header from "./components/Header"
 
-const POST_URL = 'http://drupal.docker.localhost:8000/jsonapi/node/article?sort=-created,title&include=field_tags';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 
-class App extends Component {
-
-    constructor() {
-        super();
-        this.state = { data: null };
-        this.loadPosts = this.loadPosts.bind(this);
-        this.updateData = this.updateData.bind(this);
-    }
-
-    componentDidMount() {
-        this.loadPosts();
-    }
-
-    updateData(responseData) {
-        this.setState({
-            data: responseData.data, 
-            included: responseData.included
-        });
-    }
-
-    loadPosts() {
-        console.log("Loading posts...");
-        fetch(POST_URL, {mode:'cors'})
-            .then(function (response) {
-                return response.json();
-            })
-            .then((data) => this.updateData(data))
-            .catch(err => console.log('Fetching Posts Failed', err));
-    }
-
-    render() {
-        return (
-            <div className="m-8">
-                <PostList
-                    data={this.state.data}
-                    included={this.state.included}
-                    loadPosts={this.loadPosts}
-                />
-            </div>
-        )
-    }
+export default function main() {
+  return (
+    <Router>
+      <div className='m-8'>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/posts">
+            <Posts />
+          </Route>
+          <Route exact path="/cats">
+            <Cats />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }
-
-export default App;

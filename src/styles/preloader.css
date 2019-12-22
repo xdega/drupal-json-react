@@ -1,0 +1,42 @@
+.preloader {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+}
+
+.preloader div {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-top: 2rem;
+  width: 10px;
+  height: 10px;
+  background-color: #CBD5E0;
+  animation: preload;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+
+.preloader div:nth-child(1) {
+  animation-delay: 100ms;
+}
+
+.preloader div:nth-child(2) {
+  animation-delay: 300ms;
+}
+
+.preloader div:nth-child(3) {
+  animation-delay: 500ms;
+}
+
+@keyframes preload {
+  0% {
+    background-color: #CBD5E0;
+  }
+  50% {
+    background-color: #D69E2E;
+    transform: scale(1.5);
+  }
+  100% {
+    background-color: #CBD5E0;
+  }
+}
